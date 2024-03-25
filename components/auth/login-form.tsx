@@ -20,7 +20,7 @@ import Link from "next/link";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { startTransition, useState, useTransition } from "react";
-import { login_actions } from "@/actions/login-action";
+import { login_action } from "@/actions/login-action";
 
 export const LoginForm = () => {
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -40,7 +40,7 @@ export const LoginForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      login_actions(values)
+      login_action(values)
         .then((data) => {
           if (data?.error) {
             form.reset();
