@@ -5,3 +5,11 @@ npm i react-icons
 npx shadcn-ui@latest add form
 npx shadcn-ui@latest add input
 npm i @radix-ui/react-icons
+
+npm i prisma -D
+npm i @prisma/client
+npx prisma init
+npx prisma generate
+npx prisma db push
+
+npm i @auth/prisma-adapter
