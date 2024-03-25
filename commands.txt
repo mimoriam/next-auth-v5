@@ -13,3 +13,5 @@ npx prisma generate
 npx prisma db push
 
 npm i @auth/prisma-adapter
+npm i bcryptjs
+npm i -D @types/bcryptjs
