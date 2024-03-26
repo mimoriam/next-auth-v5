@@ -53,12 +53,8 @@ export const LoginForm = () => {
             form.reset();
             setError(data.error);
           }
-
-          //  TODO: Add when 2FA
-          // if (data?.success) {
-          //   form.reset();
-          //   setSuccess(data.success);
-          // }
+          // @ts-ignore
+          setSuccess(data?.success);
         })
         .catch(() => setError("Something went wrong."));
     });
