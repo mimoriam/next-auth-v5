@@ -9,7 +9,7 @@ import { getUserByEmail } from "@/db_functions/user";
 import { generateVerificationToken } from "@/lib/tokens";
 import { sendVerificationEmail } from "@/lib/mail";
 
-export const LoginAction = async (values: z.infer<typeof LoginSchema>) => {
+export const loginAction = async (values: z.infer<typeof LoginSchema>) => {
 
   const validatedFields = LoginSchema.safeParse(values);
 

@@ -20,7 +20,7 @@ import Link from "next/link";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { startTransition, useState, useTransition } from "react";
-import { LoginAction } from "@/actions/login-action";
+import { loginAction } from "@/actions/login-action";
 import { useSearchParams } from "next/navigation";
 
 export const LoginForm = () => {
@@ -47,7 +47,7 @@ export const LoginForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      LoginAction(values)
+      loginAction(values)
         .then((data) => {
           if (data?.error) {
             form.reset();
