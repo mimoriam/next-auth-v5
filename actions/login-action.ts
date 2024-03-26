@@ -7,6 +7,7 @@ import { AuthError } from "next-auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { getUserByEmail } from "@/db_functions/user";
 import { generateVerificationToken } from "@/lib/tokens";
+import { sendVerificationEmail } from "@/lib/mail";
 
 export const login_action = async (values: z.infer<typeof LoginSchema>) => {
   console.log(values);
@@ -30,22 +31,29 @@ export const login_action = async (values: z.infer<typeof LoginSchema>) => {
       existingUser.email,
     );
 
-    try {
-      await signIn("credentials", {
-        email,
-        password,
-        redirectTo: DEFAULT_LOGIN_REDIRECT,
-      });
-    } catch (err) {
-      if (err instanceof AuthError) {
-        switch (err.type) {
-          case "CredentialsSignin":
-            return { error: "Invalid credentials!" };
-          default:
-            return { error: "Something went wrong!" };
-        }
+    await sendVerificationEmail(
+      verificationToken.email,
+      verificationToken.token,
+    );
+
+    return { success: "Confirmation email sent!" };
+  }
+
+  try {
+    await signIn("credentials", {
+      email,
+      password,
+      redirectTo: DEFAULT_LOGIN_REDIRECT,
+    });
+  } catch (err) {
+    if (err instanceof AuthError) {
+      switch (err.type) {
+        case "CredentialsSignin":
+          return { error: "Invalid credentials!" };
+        default:
+          return { error: "Something went wrong!" };
       }
-      throw err;
     }
+    throw err;
   }
 };

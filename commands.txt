@@ -18,3 +18,4 @@ npm i -D @types/bcryptjs
 npm i next-auth@beta
 npm i uuid
 npm i -D @types/uuid
+npm install resend
