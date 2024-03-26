@@ -18,7 +18,7 @@ export const {
       const existingUser = await getUserById(user.id as string);
 
       // Prevent sign in without email verification
-      if (!existingUser?.emailVerified) return false;
+      // if (!existingUser?.emailVerified) return false;
 
       return true;
     },
