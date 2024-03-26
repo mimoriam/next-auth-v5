@@ -1,7 +1,7 @@
-import { useSession } from "next-auth/react";
+import { auth } from "@/auth";
 
-export const useCurrentUser = () => {
-  const session = useSession();
+export const useCurrentUser = async () => {
+  const session = await auth();
 
-  return session.data?.user;
+  return session?.user;
 };
