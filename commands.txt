@@ -19,3 +19,5 @@ npm i next-auth@beta
 npm i uuid
 npm i -D @types/uuid
 npm install resend
+npx shadcn-ui@latest add select
+npx shadcn-ui@latest add switch

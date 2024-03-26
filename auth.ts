@@ -10,6 +10,8 @@ import { getAccountByUserId } from "@/db_functions/account";
 export const {
   handlers: { GET, POST },
   auth,
+  // @ts-ignore
+  update,
   signIn,
   signOut,
 } = NextAuth({
