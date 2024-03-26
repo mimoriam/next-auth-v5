@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { RegisterSchema } from "@/schemas";
-import { register_action } from "@/actions/register-action";
+import { RegisterAction } from "@/actions/register-action";
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -40,7 +40,7 @@ export const RegisterForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      register_action(values).then((data) => {
+      RegisterAction(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
       });

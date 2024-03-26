@@ -8,7 +8,7 @@ import { getUserByEmail } from "@/db_functions/user";
 import { generateVerificationToken } from "@/lib/tokens";
 import { sendVerificationEmail } from "@/lib/mail";
 
-export const register_action = async (
+export const RegisterAction = async (
   values: z.infer<typeof RegisterSchema>,
 ) => {
   console.log(values);
