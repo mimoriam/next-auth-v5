@@ -5,6 +5,7 @@ import prisma from "@/lib/db";
 import { getUserById } from "@/db_functions/user";
 import { UserRole } from "@prisma/client";
 import { getTwoFactorConfirmationByUserId } from "@/db_functions/two-factor-confirmation";
+import { getAccountByUserId } from "@/db_functions/account";
 
 export const {
   handlers: { GET, POST },
@@ -62,6 +63,18 @@ export const {
         session.user.role = token.role as UserRole;
       }
 
+      if (session.user) {
+        session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
+      }
+
+      if (session.user) {
+        session.user.name = token.name;
+        if (token.email != null) {
+          session.user.email = token.email;
+        }
+        session.user.isOAuth = token.isOAuth as boolean;
+      }
+
       return session;
     },
 
@@ -73,8 +86,14 @@ export const {
 
       if (!existingUser) return token;
 
+      const existingAccount = await getAccountByUserId(existingUser.id);
+
       // Adding new fields to the JWT:
       token.role = existingUser.role;
+      token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
+      token.name = existingUser.name;
+      token.email = existingUser.email;
+      token.isOAuth = !!existingAccount;
 
       return token;
     },
